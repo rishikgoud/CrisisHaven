@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A comprehensive crisis mental health support platform with AI voice assistant",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@headlessui/react": "^2.2.4",
     "@testing-library/jest-dom": "^5.16.4",
