@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#3b82f6" />
+    <meta
+      name="description"
+      content="CrisisHaven - Immediate crisis mental health support with AI voice assistant Haven. 24/7 free and confidential help."
+    />
+    <meta name="keywords" content="crisis support, mental health, AI assistant, suicide prevention, crisis intervention, mental health resources" />
+    <meta name="author" content="CrisisHaven" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://crisishaven.org/" />
+    <meta property="og:title" content="CrisisHaven - Immediate Crisis Support" />
+    <meta property="og:description" content="Connect with Haven, our AI companion, for instant triage and human counselor connection. 24/7 free and confidential." />
+    <meta property="og:image" content="%PUBLIC_URL%/og-image.jpg" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://crisishaven.org/" />
+    <meta property="twitter:title" content="CrisisHaven - Immediate Crisis Support" />
+    <meta property="twitter:description" content="Connect with Haven, our AI companion, for instant triage and human counselor connection. 24/7 free and confidential." />
+    <meta property="twitter:image" content="%PUBLIC_URL%/og-image.jpg" />
+
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <title>CrisisHaven - Immediate Crisis Support</title>
+
+    <!-- Custom CSS for OmniDimension Widget Positioning -->
+    <style>
+      /* Position the OmniDimension widget to avoid overlap with mic button */
+      #omnidimension-web-widget {
+        position: fixed !important;
+        bottom: 140px !important; /* Move up further to avoid overlap */
+        right: 20px !important;
+        z-index: 1000 !important;
+      }
+      
+      /* Ensure the widget doesn't interfere with other elements */
+      .omnidimension-widget-container {
+        margin-bottom: 120px !important;
+      }
+      /* Force the label to Haven Chat */
+      .omnidimension-agent-label {
+        opacity: 0 !important;
+      }
+      .haven-chat-label {
+        position: absolute;
+        left: 48px;
+        top: 0;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        font-family: 'Poppins', 'Inter', sans-serif;
+        font-weight: 600;
+        color: #67e8f9;
+        font-size: 1rem;
+        letter-spacing: 0.01em;
+        background: none;
+        pointer-events: none;
+      }
+      
+      /* Fallback chat widget styles */
+      .fallback-chat-widget {
+        position: fixed;
+        bottom: 140px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+        z-index: 1000;
+        transition: all 0.3s ease;
+      }
+      
+      .fallback-chat-widget:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 25px rgba(59, 130, 246, 0.4);
+      }
+      
+      .fallback-chat-widget svg {
+        width: 24px;
+        height: 24px;
+        color: white;
+      }
+      
+      .fallback-chat-widget .label {
+        position: absolute;
+        left: 48px;
+        top: 0;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        font-family: 'Poppins', 'Inter', sans-serif;
+        font-weight: 600;
+        color: #67e8f9;
+        font-size: 1rem;
+        letter-spacing: 0.01em;
+        background: none;
+        pointer-events: none;
+        white-space: nowrap;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    
+    <!-- OmniDimension Widget Configuration -->
+    <script>
+      // Initialize OmniDimension widget when loaded
+      window.addEventListener('load', function() {
+        // Wait for OmniDimension widget to load
+        const checkOmniDimension = setInterval(() => {
+          if (window.omnidimensionWidget || document.querySelector('#omnidimension-web-widget-container')) {
+            clearInterval(checkOmniDimension);
+            console.log('OmniDimension widget loaded successfully');
+            
+            // Configure widget for voice interactions
+            if (window.omnidimensionWidget) {
+              try {
+                // Set up widget configuration
+                window.omnidimensionWidget.configure({
+                  mode: 'voice', // Enable voice mode
+                  autoStart: false, // Don't auto-start
+                  enableSpeechRecognition: true,
+                  enableSpeechSynthesis: true,
+                  language: 'en-US'
+                });
+                
+                // Set up event listeners
+                window.omnidimensionWidget.on('voiceStart', () => {
+                  console.log('OmniDimension voice started');
+                  document.dispatchEvent(new CustomEvent('omnidimension-voice-start'));
+                });
+                
+                window.omnidimensionWidget.on('voiceStop', () => {
+                  console.log('OmniDimension voice stopped');
+                  document.dispatchEvent(new CustomEvent('omnidimension-voice-stop'));
+                });
+                
+                window.omnidimensionWidget.on('response', (data) => {
+                  console.log('OmniDimension response:', data);
+                  document.dispatchEvent(new CustomEvent('omnidimension-response', { detail: data }));
+                });
+                
+                window.omnidimensionWidget.on('error', (error) => {
+                  console.error('OmniDimension error:', error);
+                });
+                
+              } catch (error) {
+                console.error('Failed to configure OmniDimension widget:', error);
+              }
+            }
+          }
+        }, 1000);
+        
+        // Stop checking after 30 seconds
+        setTimeout(() => {
+          clearInterval(checkOmniDimension);
+        }, 30000);
+      });
+    </script>
+    
+    <!-- OmniDimension Widget Script -->
+    <script id="omnidimension-web-widget" async src="https://backend.omnidim.io/web_widget.js?secret_key=020a18ad8f017fa3a4d2f3badf341669"></script>
+  </body>
+</html> 
