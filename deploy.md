@@ -29,8 +29,8 @@
 4. Connect to your GitHub repository: `rishikgoud/CrisisHaven`
 5. Configure the deployment:
    - **Name**: `crisishaven-frontend`
-   - **Build Command**: `cd CrisisHaven && npm install && npm run build`
-   - **Publish Directory**: `CrisisHaven/build`
+   - **Build Command**: `cd crisishavenfrontend && npm install && npm run build`
+   - **Publish Directory**: `crisishavenfrontend/build`
 
 ### Step 3: Environment Variables
 Set these in Render dashboard for the frontend service:
