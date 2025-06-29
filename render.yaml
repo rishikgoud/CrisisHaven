@@ -33,6 +33,6 @@ services:
     staticPublishPath: ./CrisisHaven/build
     envVars:
       - key: REACT_APP_BACKEND_URL
-        value: https://crisishaven-backend.onrender.com
+        value: https://crisishaven.onrender.com
       - key: REACT_APP_SOCKET_URL
-        value: https://crisishaven-backend.onrender.com 
+        value: https://crisishaven.onrender.com 

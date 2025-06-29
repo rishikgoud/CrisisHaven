@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 
 // Configuration
 const API_CONFIG = {
-  BACKEND_URL: process.env.REACT_APP_BACKEND_URL || 'http://localhost:4000',
+  BACKEND_URL: process.env.REACT_APP_BACKEND_URL || 'https://crisishaven.onrender.com',
   MOCK_MODE: process.env.REACT_APP_MOCK_API === 'true' || false,
   API_KEY: process.env.REACT_APP_OMNIDIM_API_KEY || '4lEiG_2X1-NCgwMrQ0TkLvpkygKjwlk6lNI2YcV7_ko',
   AGENT_ID: process.env.REACT_APP_OMNIDIM_AGENT_ID || 2465,

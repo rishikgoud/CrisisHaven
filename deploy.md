@@ -4,94 +4,89 @@
 - Repository: https://github.com/rishikgoud/CrisisHaven
 - Status: Code pushed successfully
 
-## Render Deployment (Recommended)
+## Backend Deployment ✅
+- **Backend URL**: https://crisishaven.onrender.com
+- **Status**: Deployed and running
+
+## Frontend Deployment (Next Step)
 
 ### Prerequisites
-1. MongoDB Atlas account (free tier)
-2. HuggingFace API key
-3. OmniDimension API credentials
+1. MongoDB Atlas account (free tier) ✅
+2. HuggingFace API key ✅
+3. OmniDimension API credentials ✅
 
-### Step 1: MongoDB Atlas Setup
+### Step 1: MongoDB Atlas Setup ✅
 1. Go to [MongoDB Atlas](https://cloud.mongodb.com)
 2. Create a free cluster
 3. Create a database user
 4. Get your connection string
 5. Add your IP to whitelist (or use 0.0.0.0/0 for all IPs)
 
-### Step 2: Render Deployment
+### Step 2: Render Frontend Deployment
 1. Go to [Render.com](https://render.com)
 2. Sign up/login with GitHub
-3. Click "New +" → "Blueprint"
+3. Click "New +" → "Static Site"
 4. Connect to your GitHub repository: `rishikgoud/CrisisHaven`
-5. Render will auto-detect `render.yaml`
+5. Configure the deployment:
+   - **Name**: `crisishaven-frontend`
+   - **Build Command**: `cd CrisisHaven && npm install && npm run build`
+   - **Publish Directory**: `CrisisHaven/build`
 
 ### Step 3: Environment Variables
-Set these in Render dashboard:
+Set these in Render dashboard for the frontend service:
 
-**Backend Service:**
 ```
-NODE_ENV=production
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/crisishaven
-JWT_SECRET=your_super_secret_jwt_key_here_make_it_long_and_random
-HF_API_KEY=hf_your_huggingface_api_key_here
-OMNIDIM_API_KEY=your_omnidim_api_key_here
-OMNIDIM_AGENT_ID=your_agent_id_here
-FRONTEND_URL=https://crisishaven-frontend.onrender.com
-```
-
-**Frontend Service:**
-```
-REACT_APP_BACKEND_URL=https://crisishaven-backend.onrender.com
-REACT_APP_SOCKET_URL=https://crisishaven-backend.onrender.com
+REACT_APP_BACKEND_URL=https://crisishaven.onrender.com
+REACT_APP_SOCKET_URL=https://crisishaven.onrender.com
+REACT_APP_MOCK_API=false
 ```
 
 ### Step 4: Deploy
-1. Click "Apply" in Render
-2. Wait for both services to deploy (5-10 minutes)
-3. Your app will be available at:
-   - Frontend: `https://crisishaven-frontend.onrender.com`
-   - Backend: `https://crisishaven-backend.onrender.com`
+1. Click "Create Static Site"
+2. Wait for deployment (2-3 minutes)
+3. Your frontend will be available at: `https://crisishaven-frontend.onrender.com`
 
-## Vercel Deployment (Alternative)
+## Alternative: Vercel Deployment
 
 ### Frontend Only
 1. Go to [Vercel.com](https://vercel.com)
 2. Import GitHub repository
 3. Set environment variables:
    ```
-   REACT_APP_BACKEND_URL=https://crisishaven-backend.onrender.com
-   REACT_APP_SOCKET_URL=https://crisishaven-backend.onrender.com
+   REACT_APP_BACKEND_URL=https://crisishaven.onrender.com
+   REACT_APP_SOCKET_URL=https://crisishaven.onrender.com
    ```
 4. Deploy
 
 ## Environment Variables Reference
 
-### Required for Production
-| Variable | Description | Example |
+### Backend (Already Configured) ✅
+| Variable | Description | Status |
 |----------|-------------|---------|
-| `MONGODB_URI` | MongoDB connection string | `mongodb+srv://user:pass@cluster.mongodb.net/db` |
-| `JWT_SECRET` | JWT signing secret | `super_secret_key_123456789` |
-| `HF_API_KEY` | HuggingFace API key | `hf_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx` |
-| `OMNIDIM_API_KEY` | OmniDimension API key | `your_omnidim_key` |
-| `OMNIDIM_AGENT_ID` | OmniDimension agent ID | `12345` |
+| `MONGODB_URI` | MongoDB connection string | ✅ Set |
+| `JWT_SECRET` | JWT signing secret | ✅ Set |
+| `HF_API_KEY` | HuggingFace API key | ✅ Set |
+| `OMNIDIM_API_KEY` | OmniDimension API key | ✅ Set |
+| `OMNIDIM_AGENT_ID` | OmniDimension agent ID | ✅ Set |
+| `FRONTEND_URL` | Frontend URL for CORS | ✅ Set |
 
-### Optional
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `NODE_ENV` | Environment | `development` |
-| `PORT` | Server port | `4000` (Render sets automatically) |
+### Frontend (To be set)
+| Variable | Description | Value |
+|----------|-------------|-------|
+| `REACT_APP_BACKEND_URL` | Backend API URL | `https://crisishaven.onrender.com` |
+| `REACT_APP_SOCKET_URL` | WebSocket URL | `https://crisishaven.onrender.com` |
 
 ## Troubleshooting
 
 ### Common Issues
 1. **Build fails**: Check if all dependencies are in package.json
 2. **Environment variables**: Ensure all required vars are set
-3. **MongoDB connection**: Verify connection string and IP whitelist
-4. **CORS errors**: Check FRONTEND_URL in backend environment
+3. **CORS errors**: Check FRONTEND_URL in backend environment
+4. **Socket connection**: Verify WebSocket URL is correct
 
 ### Health Checks
-- Backend: `https://crisishaven-backend.onrender.com/health`
-- Setup: `https://crisishaven-backend.onrender.com/setup`
+- Backend: https://crisishaven.onrender.com/health
+- Setup: https://crisishaven.onrender.com/setup
 
 ## Post-Deployment
 
@@ -115,4 +110,4 @@ REACT_APP_SOCKET_URL=https://crisishaven-backend.onrender.com
 
 ---
 
-**Your CrisisHaven app is now ready for the hackathon! 🎉** 
+**Your CrisisHaven backend is deployed! Now deploy the frontend to complete the setup! 🎉** 

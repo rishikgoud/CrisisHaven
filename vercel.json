@@ -20,7 +20,7 @@
     }
   ],
   "env": {
-    "REACT_APP_BACKEND_URL": "https://crisishaven-backend.onrender.com",
-    "REACT_APP_SOCKET_URL": "https://crisishaven-backend.onrender.com"
+    "REACT_APP_BACKEND_URL": "https://crisishaven.onrender.com",
+    "REACT_APP_SOCKET_URL": "https://crisishaven.onrender.com"
   }
 } 

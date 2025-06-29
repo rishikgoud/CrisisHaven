@@ -17,7 +17,7 @@ class SocketService {
       return this.socket;
     }
 
-    const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:4000';
+    const backendUrl = process.env.REACT_APP_BACKEND_URL || 'https://crisishaven.onrender.com';
     
     this.socket = io(backendUrl, {
       transports: ['websocket', 'polling'],
