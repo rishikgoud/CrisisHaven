@@ -1,0 +1,38 @@
+services:
+  # Backend API Service
+  - type: web
+    name: crisishaven-backend
+    env: node
+    plan: free
+    buildCommand: cd server && npm install
+    startCommand: cd server && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: HF_API_KEY
+        sync: false
+      - key: OMNIDIM_API_KEY
+        sync: false
+      - key: OMNIDIM_AGENT_ID
+        sync: false
+      - key: FRONTEND_URL
+        value: https://crisishaven-frontend.onrender.com
+
+  # Frontend React App
+  - type: web
+    name: crisishaven-frontend
+    env: static
+    plan: free
+    buildCommand: cd CrisisHaven && npm install && npm run build
+    staticPublishPath: ./CrisisHaven/build
+    envVars:
+      - key: REACT_APP_BACKEND_URL
+        value: https://crisishaven-backend.onrender.com
+      - key: REACT_APP_SOCKET_URL
+        value: https://crisishaven-backend.onrender.com 

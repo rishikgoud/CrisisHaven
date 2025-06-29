@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "CrisisHaven/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/CrisisHaven/$1"
+    }
+  ],
+  "env": {
+    "REACT_APP_BACKEND_URL": "https://crisishaven-backend.onrender.com",
+    "REACT_APP_SOCKET_URL": "https://crisishaven-backend.onrender.com"
+  }
+} 
