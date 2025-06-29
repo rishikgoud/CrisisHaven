@@ -17,35 +17,33 @@ const envContent = `# CrisisHaven Backend Environment Variables
 # Development Configuration
 
 # Server Configuration
-PORT=5000
-NODE_ENV=development
+PORT=PORT
+NODE_ENV=NODE_ENV
 
-# MongoDB Connection - Using MongoDB Atlas (free tier)
-# You can sign up at https://www.mongodb.com/atlas
-# Or use local MongoDB if you have it installed
-MONGODB_URI=mongodb+srv://crisishaven:crisishaven123@cluster0.mongodb.net/crisishaven?retryWrites=true&w=majority
+
+MONGODB_URI=MONGODB_URI
 
 # For local development without MongoDB, you can use:
 # MONGODB_URI=mongodb://localhost:27017/crisishaven
 
 # JWT Configuration
-JWT_SECRET=crisishaven_dev_secret_key_2024_change_in_production
-JWT_EXPIRES_IN=7d
+JWT_SECRET=JWT_SECRET
+JWT_EXPIRES_IN=JWT_EXPIRES_IN
 
 # OmniDimension API Configuration
-OMNIDIM_API_KEY=4lEiG_2X1-NCgwMrQ0TkLvpkygKjwlk6lNI2YcV7_ko
-OMNIDIM_AGENT_ID=2465
+OMNIDIM_API_KEY=OMNIDIM_API_KEY
+OMNIDIM_AGENT_ID=OMNIDIM_AGENT_ID
 OMNIDIM_BASE_URL=https://api.omnidim.io
 
 # CORS Configuration
-CORS_ORIGIN=http://localhost:3000
+CORS_ORIGIN=CORS_ORIGIN
 
 # Rate Limiting
-RATE_LIMIT_WINDOW_MS=900000
-RATE_LIMIT_MAX_REQUESTS=100
+RATE_LIMIT_WINDOW_MS=RATE_LIMIT_WINDOW_MS
+RATE_LIMIT_MAX_REQUESTS=RATE_LIMIT_MAX_REQUESTS
 
-# Security
-BCRYPT_ROUNDS=12
+# Security  
+BCRYPT_ROUNDS=BCRYPT_ROUNDS
 `;
 
 try {
